@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Döviz Takip - Canlı Kur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <span class="nav-logo">⟠</span>
+                <span class="nav-title">Döviz Takip</span>
+            </div>
+            <div class="nav-right">
+                <div class="nav-countdown" id="countdown">
+                    <span class="countdown-icon">↻</span>
+                    <span id="countdown-text">30s</span>
+                </div>
+                <button class="nav-refresh" id="refresh-btn" title="Şimdi Güncelle">⟳</button>
+                <div class="nav-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">CANLI</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span id="last-update">Yükleniyor...</span>
+            </div>
+        </header>
+
+        <!-- Converter -->
+        <div class="converter-card">
+            <h2 class="section-title">Dönüştürücü</h2>
+            <div class="converter-grid">
+                <div class="converter-input-group">
+                    <label class="currency-label">Kaynak</label>
+                    <div class="input-row">
+                        <select class="currency-select" id="source-currency"></select>
+                        <input type="number" id="source-amount" placeholder="0.00" step="0.01">
+                    </div>
+                </div>
+
+                <div class="swap-container">
+                    <button class="swap-btn" id="swap-btn">⇄</button>
+                </div>
+
+                <div class="converter-input-group">
+                    <label class="currency-label">Hedef</label>
+                    <div class="input-row">
+                        <select class="currency-select" id="target-currency"></select>
+                        <input type="text" id="target-amount" readonly placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+            <div class="converter-result" id="result-text">Sonuç: —</div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-card">
+            <div class="chart-header">
+                <h2 class="section-title">Trend</h2>
+                <div class="chart-controls">
+                    <button class="period-btn active" data-period="7">1H</button>
+                    <button class="period-btn" data-period="30">1A</button>
+                    <button class="period-btn" data-period="90">3A</button>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+
+        <!-- All Rates -->
+        <div class="rates-section">
+            <div class="rates-header">
+                <h2 class="section-title">Tüm Kurlar</h2>
+                <div class="base-selector">
+                    <span class="base-label">Baz:</span>
+                    <button class="base-btn active" data-base="EUR">EUR</button>
+                    <button class="base-btn" data-base="TRY">TRY</button>
+                    <button class="base-btn" data-base="USD">USD</button>
+                </div>
+            </div>
+            <div class="currency-cards" id="currency-cards">
+                <div class="loading-card">
+                    <div class="spinner"></div>
+                    <span>Kurlar yükleniyor...</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Veriler <a href="https://fxapi.app" target="_blank">fxapi.app</a> üzerinden sağlanmaktadır · 5 dakikada bir güncellenir</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
